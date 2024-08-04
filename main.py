@@ -20,4 +20,5 @@ entry.pack(pady=10)
 label = tk.Label(root, text='Hello Tkinter world')
 label.pack(pady=10)
 
+#starting the event loop to display the window and respond to user interactions:
 root.mainloop()
