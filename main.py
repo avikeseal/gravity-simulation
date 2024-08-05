@@ -1,5 +1,7 @@
 #importing tkinter:
 import tkinter as tk
+import math
+import random
 from tkinter import ttk
 from PIL import Image, ImageTk
 
@@ -19,6 +21,13 @@ root.geometry(f'{fixed_width}x{fixed_height}')
 
 #restricting the window from being resized:
 root.resizable(False, False)
+
+#constants--------------
+
+#gravitational constant
+G = 6.67430e-11
+#number of celestial objects:
+NUM_OBJECTS = 3 
 
 #---tkinter testing--------------------------------------------------------
 #Adding a label:
