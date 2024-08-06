@@ -58,6 +58,8 @@ canvas.create_image(0, 0, image=bg_photo, anchor="nw")
 #creating a planet class to manage each planet's properties and methods:
 class Planet:
     def __init__(self, canvas, x, y, size, mass):
+
+        #assigns provided values to instance attributes:
         self.canvas = canvas
         self.id = canvas.create_oval(x, y, x + size, y + size, fill='blue')
         self.size = size
@@ -93,6 +95,18 @@ class Planet:
         #coordinates of the canvas object - self.id to the new position:
         #self.x and self.y
         self.canvas.coords(self.id, self.x, self.y)
+
+    #calculating and applying gravitational force between planets:
+    def apply_gravity(self, other):
+        #evaluating distance components:
+        #using the differences in x and y coordinatesof the two planets
+        #are also used to calculate the angle of the force vector
+        dx = other.x - self.x
+        dy = other.y - self.y
+
+        #calculating distance:
+        distance = math.sqrt(dx ** 2)
+
 
 
 
