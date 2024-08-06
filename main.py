@@ -9,7 +9,7 @@ from PIL import Image, ImageTk
 
 
 root = tk.Tk()
-root.title('Gravity Simulation App')
+root.title('Gravity Simulation')
 
 #setting the window size (width x height):
 #root.geometry('400x300')
@@ -27,7 +27,7 @@ root.resizable(False, False)
 #gravitational constant
 G = 1
 #number of celestial objects:
-PLANET_COUNT = 6
+PLANET_COUNT = 3
 PLANET_SIZE = 50 
 
 #---tkinter testing--------------------------------------------------------
@@ -85,10 +85,10 @@ class Planet:
         #checks if the planet has collided with the right or left edge of the canvas:
         if self.x + self.size > self.canvas.winfo_width() or self.x < 0:
             #if true the velocity is reversed and the planet bounces back into the window:
-            self.vx = -self.vx
+            self.vx =- self.vx
         #checks if the planet has collided with the top or bottom edge of the canvas:
         if self.y + self.size > self.canvas.winfo_height() or self.y < 0:
-            self.vy = -self.vy
+            self.vy =- self.vy
 
         #updates the postion on the canvas to reflect new coordinates:
         #'coords' method of the canvas widget changes the
@@ -147,10 +147,35 @@ for _ in range(PLANET_COUNT):
     planet = Planet(canvas, x, y, PLANET_SIZE, mass)
     planets.append(planet)
 
+#defining the animation loop:
+def animate():
+    
+    #iterates over each planet in the 'planets' list
+    #enumerate function provides both the index (i) and the planet object ('planet')
+    for  i, planet in enumerate(planets):
+        
+        #calculate gravitational forces:
+        #the inner loop iterates over all planets again
+        #for each pair of 'planet' and 'other' it checks if they are not the same planet (i != j):
+        for j, other in enumerate(planets):
+            if i != j:
+                planet.apply_gravity(other)
+        
+        #updating planet position:
+        #after applying the G fores from all other planets, the 'move'
+        #method is called for the current 'planet' to update its position based on velocity
+        planet.move()
+
+    #repeating the animation:
+    #'root.after' function call schedules the 'animate' fcunction
+    #to be called again after 20 ms:
+    root.after(20, animate)
+
 
 
 
 
 
 #starting the event loop to display the window and respond to user interactions:
+animate()
 root.mainloop()
