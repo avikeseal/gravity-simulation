@@ -25,10 +25,10 @@ root.resizable(False, False)
 #constants--------------
 
 #gravitational constant
-G = 6.67430e-11
+G = 1
 #number of celestial objects:
-PLANET_COUNT = 3
-PLANET_SIZE = 30 
+PLANET_COUNT = 6
+PLANET_SIZE = 50 
 
 #---tkinter testing--------------------------------------------------------
 #Adding a label:
@@ -104,9 +104,48 @@ class Planet:
         dx = other.x - self.x
         dy = other.y - self.y
 
-        #calculating distance:
-        distance = math.sqrt(dx ** 2)
+        #calculating distance using the Pythagorean theorem
+        #this is the Euclidean distance in 2D space
+        distance = math.sqrt( (dx ** 2) + (dy ** 2) )
+        #to ensure that planets do not overlap for being too close 
+        #to each other (closer than the radius of the planet)
+        #in that case the force will not be applied:
+        if distance < self.size:
+            return
+        #calculating gravitational force using Newton's law of univeral gravitation:
+        force = G * ( self.mass * other.mass ) / (distance ** 2)
+        
+        #calculating the angle of the force:
+        #the angle of the force vector is calculated using the
+        #atan2 function which returns the arctan of dy/dx
+        #this angle represents the direction of the gravitational force from self to other
+        angle = math.atan2(dy, dx)
+        #updating velocities based on force:
+        #x and y components are calculated using cos(angle) amd sin(angle):
+        #dividing the components by the mass (self.mass) to get acceleration:
+        #acceleration components are then added to current velocities
+        #(self.vx and self.vy)to update them based on the gravitational force
+        self.vx += (force * math.cos(angle) ) / (self.mass)
+        self.vy += (force * math.sin(angle) ) / (self.mass)
 
+#creating and initializing planets:
+#a list to hold planets:
+planets =  []
+#loop to create planets:
+#this will run 6 times and generate a sequene of numbers from 0 to 4:
+#underscore is used as a variable name since we do not need the loop variable:
+for _ in range(PLANET_COUNT):
+    #generating random position and mass:
+    #random intial x position:
+    x = random.randint(0, 750)
+    #random intial y position:
+    y = random.randint(0, 550)
+    #random mass within a specified range:
+    mass = random.uniform(1, 6)
+    #new planet instance:
+    #a new 'Planet' object with specified canvas, position, size (50) and mass
+    planet = Planet(canvas, x, y, PLANET_SIZE, mass)
+    planets.append(planet)
 
 
 
