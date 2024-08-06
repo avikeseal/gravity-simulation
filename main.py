@@ -27,8 +27,9 @@ root.resizable(False, False)
 #gravitational constant
 G = 1
 #number of celestial objects:
-PLANET_COUNT = 3
-PLANET_SIZE = 50 
+PLANET_COUNT = random.randint(2,5)
+print(f"Creating {PLANET_COUNT} planets")
+PLANET_SIZE = 30 
 
 #---tkinter testing--------------------------------------------------------
 #Adding a label:
@@ -49,7 +50,7 @@ bg_image  = Image.open(r"C:\Users\PC\Desktop\projects\gravity-simulation\images\
 bg_photo = ImageTk.PhotoImage(bg_image)
 
 #creating canvas:
-canvas = tk.Canvas(root, width=800, height=600)
+canvas = tk.Canvas(root, width=800, height=580)
 canvas.pack(fill='both', expand=True)
 
 #setting the background image on canvas:
@@ -67,10 +68,10 @@ class Planet:
         self.x = x
 
         #horizontal velocity:
-        self.vx = random.uniform(-2, 2)
+        self.vx = random.uniform(-10, 10)
         #vertical velocity: 
         self.y = y
-        self.vy = random.uniform(-2, 2)
+        self.vy = random.uniform(-10, 10)
     
     #this function will update the planet's position
     #(self.x and self.y) based on  its current velocity.
@@ -80,7 +81,7 @@ class Planet:
     def move(self):
         #by adding the velocity components it updates the planet position:
         self.x += self.vx
-        self.y += self.vy
+        self.y += self.vy 
 
         #checks if the planet has collided with the right or left edge of the canvas:
         if self.x + self.size > self.canvas.winfo_width() or self.x < 0:
@@ -94,19 +95,19 @@ class Planet:
         #'coords' method of the canvas widget changes the
         #coordinates of the canvas object - self.id to the new position:
         #self.x and self.y
-        self.canvas.coords(self.id, self.x, self.y)
+        self.canvas.coords(self.id, self.x, self.y, (self.x + self.size), (self.y +  self.size) )
 
     #calculating and applying gravitational force between planets:
     def apply_gravity(self, other):
         #evaluating distance components:
-        #using the differences in x and y coordinatesof the two planets
+        #using the differences in x and y coordinatesv of the two planets
         #are also used to calculate the angle of the force vector
         dx = other.x - self.x
         dy = other.y - self.y
 
         #calculating distance using the Pythagorean theorem
         #this is the Euclidean distance in 2D space
-        distance = math.sqrt( (dx ** 2) + (dy ** 2) )
+        distance = math.sqrt( dx ** 2 + dy ** 2 )
         #to ensure that planets do not overlap for being too close 
         #to each other (closer than the radius of the planet)
         #in that case the force will not be applied:
@@ -137,11 +138,11 @@ planets =  []
 for _ in range(PLANET_COUNT):
     #generating random position and mass:
     #random intial x position:
-    x = random.randint(0, 750)
+    x = random.randint(300, 780)
     #random intial y position:
-    y = random.randint(0, 550)
+    y = random.randint(100, 580)
     #random mass within a specified range:
-    mass = random.uniform(1, 6)
+    mass = random.uniform(1, 10)
     #new planet instance:
     #a new 'Planet' object with specified canvas, position, size (50) and mass
     planet = Planet(canvas, x, y, PLANET_SIZE, mass)
@@ -170,6 +171,7 @@ def animate():
     #'root.after' function call schedules the 'animate' fcunction
     #to be called again after 20 ms:
     root.after(20, animate)
+    print("Animation Step")
 
 
 
