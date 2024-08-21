@@ -22,3 +22,10 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (135, 206, 250)
 YELLOW = (255, 255, 0)
+
+#gravitational constant:
+G = 13
+
+#storage cap on position and velocity values:
+MAX_PATH_LENGTH = 500
+MAX_V_LENGTH = 500
