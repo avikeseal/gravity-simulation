@@ -41,7 +41,20 @@ class Body:
         self.color = color
         self.path = []
 
+    #apply gravity method calculates gravity:
+    def apply_gravity(self, other):
+        dx = other.pos[0] - self.pos[0]
+        dy = other.pos[1] - self.pos[1]
+        distance = math.sqrt( (dx**2) + (dy**2) )
 
+        if distance > 0:
+            force = (G * self.mass * other.mass)/(distance**2)
+            angle = math.atan2(dy, dx)
+            force_x = force * math.cos(angle)
+            force_y = force * math.sin(angle)
+
+            self.vel[0] += force_x / self.mass
+            self.vel[1] += force_y / self.mass
 
 
 
