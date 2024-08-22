@@ -64,7 +64,14 @@ class Body:
 
         #remove old path data to free up memory:
         if len(self.path) > MAX_PATH_LENGTH:
-                         self.path.pop(0)
+            sefl.path.pop(0)
+
+
+    #draw method handles drawing the object:
+    def draw(self, screen):
+        pygame.draw.circle(screen, self.color, (int(self.pos[0]), int(self.pos[1])), self.radius)
+        if len(self.path) > 1:
+            pygame.draw.lines(screen, YELLOW, False, self.path, 2)
 
 
 
