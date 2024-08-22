@@ -29,3 +29,29 @@ G = 13
 #storage cap on position and velocity values:
 MAX_PATH_LENGTH = 500
 MAX_V_LENGTH = 500
+
+#this class represents each object in the simulation
+#includes properties for position, velocity, mass, radius, color and path:
+class Body:
+    def __init__(self, x, y, mass, radius, color):
+        self.pos = [x, y]
+        self.vel = [0, 0]
+        self.mass = mass
+        self.radius = radius
+        self.color = color
+        self.path = []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
