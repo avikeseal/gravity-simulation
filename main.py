@@ -62,7 +62,9 @@ class Body:
         self.pos[1] += self.vel[1]
         self.path.append((int(self.pos[0]), int(self.pos[1]))
 
-
+        #remove old path data to free up memory:
+        if len(self.path) > MAX_PATH_LENGTH:
+                         self.path.pop(0)
 
 
 
