@@ -56,6 +56,14 @@ class Body:
             self.vel[0] += force_x / self.mass
             self.vel[1] += force_y / self.mass
 
+    #update_position method updates the position based on velocity:
+    def update_position(self):
+        self.pos[0] += self.vel[0]
+        self.pos[1] += self.vel[1]
+        self.path.append((int(self.pos[0]), int(self.pos[1]))
+
+
+
 
 
 
