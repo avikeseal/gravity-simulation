@@ -81,6 +81,15 @@ def create_graph(velocities, figsize=(5, 7)):
     ax.axhline(y=np.max(velocities), color='g', linestyles='--', label='Max Velocity')
     ax.legend()
 
+    #draws the plot:
+    canvas = FigureCanvas(fig)
+    canvas.draw()
+    renderer = canvas.get_renderer()
+    raw_data = renderer.tostring_rgb()
+    size = canvas.get_width_height()
+
+    #close the figure to free up memory:
+    plt.close(fig)
 
 
 
