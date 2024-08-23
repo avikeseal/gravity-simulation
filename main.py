@@ -90,6 +90,14 @@ def create_graph(velocities, figsize=(5, 7)):
 
     #close the figure to free up memory:
     plt.close(fig)
+    return raw_data, size
+
+#the main function initializes the pygame screen, 
+#creates the objects and runs the main loop:
+def main():
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption('Gravity Simulation')
+    clock = pygame.time.Clock()
 
 
 
