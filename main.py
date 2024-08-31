@@ -104,6 +104,12 @@ def main():
     font = pygame.font.Font(font_path, 45)
     font_color = YELLOW
 
+    #initializing bodies:
+    central_body =  Body(WIDTH//2 + 250, (HEIGHT//2 - 100), 1000, 60, RED)
+    moving_body = Body((WIDTH//2 + 500), (HEIGHT//2 - 100), 1, 15, BLUE)
+    #initial velocity:
+    moving_body.vel = [-3.5, -6]
+
 
 
 
