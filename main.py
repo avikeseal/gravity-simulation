@@ -144,6 +144,17 @@ def main():
     #render the heading:
     heading = font.render('Welcome to Gravity Simulation', True, YELLOW)
     screen.blit(heading, (WIDTH//2 - heading.get_width()//2, 10))
+
+    for body in bodies:
+        body.draw(screen)
+
+    
+    #displaying the graph:
+    #adjusted position:
+    screen.blit(graph_surface, (40, 80))
+
+    #cap the frame rate to 60 fps:
+    clock.tick(60)
     
 
 
