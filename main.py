@@ -16,6 +16,7 @@ pygame.display.set_caption("Gravity Simulation")
 pygame.init()
 pygame.font.init()
 
+
 #colors:
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -100,7 +101,7 @@ def main():
     clock = pygame.time.Clock()
 
     #initializing fonts:
-    font_path = 'cyberspace_font\Cyberspace Raceway Front.otf'
+    font_path = 'Cyberspace Raceway Front.otf'
     font = pygame.font.Font(font_path, 45)
     font_color = YELLOW
 
