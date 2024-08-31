@@ -110,6 +110,25 @@ def main():
     #initial velocity:
     moving_body.vel = [-3.5, -6]
 
+    bodies = [central_body, moving_body]
+    velocities = []
+
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+    #calculates gravity and updates position:
+    for body in bodies:
+        if body != central_body:
+            body.apply_gravity(central_body)
+        if body != moving_body:
+            body.apply_gravity(moving_body)
+        body.update_position()
+
+    
+
 
 
 
