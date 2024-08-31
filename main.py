@@ -137,6 +137,13 @@ def main():
     #creating the graph:
     raw_data, size = create_graph(velocities)
     graph_surface = pygame.image.fromstring(raw_data, size, 'RGB')
+
+    #drawing everything:
+    screen.fill(BLACK)
+
+    #render the heading:
+    heading = font.render('Welcome to Gravity Simulation', True, YELLOW)
+    screen.blit(heading, (WIDTH//2 - heading.get_width()//2, 10))
     
 
 
