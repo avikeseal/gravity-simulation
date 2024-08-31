@@ -3,7 +3,7 @@
 
 import pygame
 import math
-import matplotlib.pylplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
@@ -60,11 +60,11 @@ class Body:
     def update_position(self):
         self.pos[0] += self.vel[0]
         self.pos[1] += self.vel[1]
-        self.path.append((int(self.pos[0]), int(self.pos[1]))
+        self.path.append((int(self.pos[0]), int(self.pos[1])))
 
         #remove old path data to free up memory:
         if len(self.path) > MAX_PATH_LENGTH:
-            sefl.path.pop(0)
+            self.path.pop(0)
 
 
     #draw method handles drawing the object:
