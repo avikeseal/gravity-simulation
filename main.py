@@ -77,8 +77,8 @@ class Body:
 def create_graph(velocities, figsize=(5, 7)):
     fig, ax = plt.subplots(figsize=figsize)
     ax.plot(velocities, label='Velocity')
-    ax.axhline(y=np.min(velocities), color='r', linestyles='--', label='Min Velocity')
-    ax.axhline(y=np.max(velocities), color='g', linestyles='--', label='Max Velocity')
+    ax.axhline(y=np.min(velocities), color='r', linestyle='--', label='Min Velocity')
+    ax.axhline(y=np.max(velocities), color='g', linestyle='--', label='Max Velocity')
     ax.legend()
 
     #draws the plot:
@@ -100,7 +100,7 @@ def main():
     clock = pygame.time.Clock()
 
     #initializing fonts:
-    font_path = 'cyberspace_font\Cyberspace Raceway Front.o tf'
+    font_path = 'cyberspace_font\Cyberspace Raceway Front.otf'
     font = pygame.font.Font(font_path, 45)
     font_color = YELLOW
 
@@ -119,43 +119,52 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
-    #calculates gravity and updates position:
-    for body in bodies:
-        if body != central_body:
-            body.apply_gravity(central_body)
-        if body != moving_body:
-            body.apply_gravity(moving_body)
-        body.update_position()
+        #calculates gravity and updates position:
+        for body in bodies:
+            if body != central_body:
+                body.apply_gravity(central_body)
+            if body != moving_body:
+                body.apply_gravity(moving_body)
+            body.update_position()
 
-    #calculate and store velocity for the moving body:
-    velocity = math.sqrt((moving_body.vel[0]**2) + (moving_body.vel[1]**2))
-    velocities.append(velocity)
-    #removing old velocity data to free up memory:
-    if len(velocities) > MAX_V_LENGTH:
-        velocities.pop(0)
-    
-    #creating the graph:
-    raw_data, size = create_graph(velocities)
-    graph_surface = pygame.image.fromstring(raw_data, size, 'RGB')
+        #calculate and store velocity for the moving body:
+        velocity = math.sqrt((moving_body.vel[0]**2) + (moving_body.vel[1]**2))
+        velocities.append(velocity)
+        #removing old velocity data to free up memory:
+        if len(velocities) > MAX_V_LENGTH:
+            velocities.pop(0)
+        
+        #creating the graph:
+        raw_data, size = create_graph(velocities)
+        graph_surface = pygame.image.fromstring(raw_data, size, 'RGB')
 
-    #drawing everything:
-    screen.fill(BLACK)
+        #drawing everything:
+        screen.fill(BLACK)
 
-    #render the heading:
-    heading = font.render('Welcome to Gravity Simulation', True, YELLOW)
-    screen.blit(heading, (WIDTH//2 - heading.get_width()//2, 10))
+        #render the heading:
+        heading = font.render('Welcome to Gravity Simulation', True, YELLOW)
+        screen.blit(heading, (WIDTH//2 - heading.get_width()//2, 10))
 
-    for body in bodies:
-        body.draw(screen)
+        for body in bodies:
+            body.draw(screen)
 
-    
-    #displaying the graph:
-    #adjusted position:
-    screen.blit(graph_surface, (40, 80))
+        
+        #displaying the graph:
+        #adjusted position:
+        screen.blit(graph_surface, (40, 80))
 
-    #cap the frame rate to 60 fps:
-    clock.tick(60)
-    
+        #cap the frame rate to 60 fps:
+        clock.tick(60)
+
+        #update the display:
+        pygame.display.flip()
+
+    pygame.quit()
+
+if __name__ == '__main__':
+    main()
+
+        
 
 
 
