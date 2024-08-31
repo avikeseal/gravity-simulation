@@ -127,6 +127,16 @@ def main():
             body.apply_gravity(moving_body)
         body.update_position()
 
+    #calculate and store velocity for the moving body:
+    velocity = math.sqrt((moving_body.vel[0]**2) + (moving_body.vel[1]**2))
+    velocities.append(velocity)
+    #removing old velocity data to free up memory:
+    if len(velocities) > MAX_V_LENGTH:
+        velocities.pop(0)
+    
+    #creating the graph:
+    raw_data, size = create_graph(velocities)
+    graph_surface = pygame.image.fromstring(raw_data, size, 'RGB')
     
 
 
